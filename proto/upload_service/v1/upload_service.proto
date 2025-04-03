@@ -4,6 +4,8 @@ package upload_service.v1;
 
 option go_package = ".";
 
+import "google/protobuf/timestamp.proto";
+
 service FileService {
     // Загрузка файла на сервер (потоковая)
     rpc Upload(stream UploadRequest) returns (UploadResponse);
@@ -22,7 +24,7 @@ service FileService {
 message FileInfo {
     string file_id = 1;   
     string filename = 2;     // Оригинальное имя файла
-    string created_at = 3;   // RFC3339 
+    google.protobuf.Timestamp created_at = 3;   
     uint64 size = 4;         // Размер в байтах
 }
 
