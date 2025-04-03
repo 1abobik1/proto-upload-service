@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.28.3
-// source: proto/upload_service/upload_service.proto
+// source: proto/upload_service/v1/upload_service.proto
 
 package __
 
@@ -19,10 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	FileService_Upload_FullMethodName          = "/upload_service.FileService/Upload"
-	FileService_ListFiles_FullMethodName       = "/upload_service.FileService/ListFiles"
-	FileService_GetDownloadLink_FullMethodName = "/upload_service.FileService/GetDownloadLink"
-	FileService_DownloadZip_FullMethodName     = "/upload_service.FileService/DownloadZip"
+	FileService_Upload_FullMethodName          = "/upload_service.v1.FileService/Upload"
+	FileService_ListFiles_FullMethodName       = "/upload_service.v1.FileService/ListFiles"
+	FileService_GetDownloadLink_FullMethodName = "/upload_service.v1.FileService/GetDownloadLink"
+	FileService_DownloadZip_FullMethodName     = "/upload_service.v1.FileService/DownloadZip"
 )
 
 // FileServiceClient is the client API for FileService service.
@@ -212,7 +212,7 @@ type FileService_DownloadZipServer = grpc.ServerStreamingServer[DownloadZipRespo
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var FileService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "upload_service.FileService",
+	ServiceName: "upload_service.v1.FileService",
 	HandlerType: (*FileServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -236,5 +236,5 @@ var FileService_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 	},
-	Metadata: "proto/upload_service/upload_service.proto",
+	Metadata: "proto/upload_service/v1/upload_service.proto",
 }

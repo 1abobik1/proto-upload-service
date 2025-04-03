@@ -1,5 +1,6 @@
 syntax = "proto3";
-package upload_service;
+
+package upload_service.v1;
 
 option go_package = ".";
 
