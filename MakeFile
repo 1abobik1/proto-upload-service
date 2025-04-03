@@ -1,0 +1,24 @@
+# Папка с proto-файлами
+PROTO_DIR := proto/upload_service
+
+# Имя proto-файла
+PROTO_FILE := $(PROTO_DIR)/upload_service.proto
+
+# Папка для генерируемых Go файлов
+OUT_DIR := ./gen/go/upload_service
+
+# Цель по умолчанию для генерации Go файлов
+all: generate
+
+$(OUT_DIR):
+	mkdir -p $(OUT_DIR)
+
+# Правило для генерации Go файлов из proto
+generate: $(OUT_DIR)
+	protoc --go_out=$(OUT_DIR) --go-grpc_out=$(OUT_DIR) $(PROTO_FILE)
+
+# Очистка сгенерированных файлов
+clean:
+	rm -f $(OUT_DIR)/*.go
+
+.PHONY: all generate clean

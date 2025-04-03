@@ -1,0 +1,64 @@
+syntax = "proto3";
+package upload_service;
+
+option go_package = ".";
+
+service FileService {
+    // Загрузка файла на сервер (потоковая)
+    rpc Upload(stream UploadRequest) returns (UploadResponse);
+
+    // Получение списка файлов
+    rpc ListFiles(ListRequest) returns (ListResponse);
+
+    // Генерация Presigned URL для скачивания одного файла
+    rpc GetDownloadLink(DownloadLinkRequest) returns (DownloadLinkResponse);
+
+    // Скачивание нескольких файлов в zip-архиве (потоковая передача)
+    rpc DownloadZip(DownloadZipRequest) returns (stream DownloadZipResponse);
+}
+
+// --- Общие сообщения ---
+message FileInfo {
+    string file_id = 1;   
+    string filename = 2;     // Оригинальное имя файла
+    string created_at = 3;   // RFC3339 
+    uint64 size = 4;         // Размер в байтах
+}
+
+// --- Upload ---
+message UploadRequest {
+    oneof data {
+        string filename = 1;  // Только в первом chunk
+        bytes chunk = 2;
+    }
+}
+
+message UploadResponse {
+    string file_id = 1;
+    uint64 size = 2;
+}
+
+// --- List Files ---
+message ListRequest {}
+
+message ListResponse {
+    repeated FileInfo files = 1;
+}
+
+// --- Presigned URL ---
+message DownloadLinkRequest {
+    string file_id = 1; // инфа о файле
+}
+
+message DownloadLinkResponse {
+    string url = 1;  // Presigned URL от MinIO
+}
+
+// --- Zip Archive ---
+message DownloadZipRequest {
+    repeated string file_ids = 1;  // ID файлов для архивации
+}
+
+message DownloadZipResponse {
+    bytes chunk = 1;  // Порция zip-архива
+}
