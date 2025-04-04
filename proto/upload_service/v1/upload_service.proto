@@ -10,7 +10,7 @@ service FileService {
     // загрузка файла на сервер
     rpc Upload(stream UploadRequest) returns (UploadResponse);
 
-    // обновление файла, можно обновить название файла и сами данные
+    // обновление файла
     rpc UpdateFile(stream UpdateFileRequest) returns (UpdateFileResponse);
 
     // получение списка файлов
